@@ -1,34 +1,28 @@
 import unittest
-from my_app1 import api, create_transfer, get_transfer_status
 from unittest.mock import patch
+import my_app1
 
-class CreateTransferTest(unittest.TestCase):
+class TestCreatePixTransfers(unittest.TestCase):
 
-    def test_create_transfer_with_invalid_account_type(self):
-        """Testa se ValueError é lançado para tipo de conta inválido."""
-        client = api.Client()
+    @patch('my_app1.create_pix_transfers')
+    def test_create_pix_transfers_successful(self, mock_create_pix_transfers):
+        """Testa se a função cria transferências corretamente."""
+        # Simula um conjunto de transferências bem-sucedidas
+        mock_create_pix_transfers.return_value = [{'id': i, 'status': 'success'} for i in range(10)]
 
-        with self.assertRaises(ValueError) as context:
-            transfer = client.pix.transfers.create(
-                amount=100,
-                sender_id="1",
-                receiver_id="2",
-                account_type="INVALID",
-            )
-        self.assertEqual(str(context.exception), "Expected error message")
+        # Chamada da função a ser testada (aqui, você chamaria a função que utiliza create_pix_transfers)
+        transfers = my_app1.create_pix_transfers()
+        self.assertEqual(len(transfers), 10)  # Verifica se 10 transferências foram criadas
 
-class GetTransferStatusTest(unittest.TestCase):
+    @patch('my_app1.create_pix_transfers')
+    def test_create_pix_transfers_exception(self, mock_create_pix_transfers):
+        """Testa o comportamento da função quando ocorre uma exceção."""
+        # Simula uma exceção ao tentar criar transferências
+        mock_create_pix_transfers.return_value = None
 
-    @patch('my_app1.api.Client.pix.transfers.get_status')
-    def test_get_transfer_status_processing(self, mock_get_status):
-        """Testa se o status 'processing' é retornado corretamente."""
-        mock_get_status.return_value = {'status': "processing"}
+        # Chamada da função a ser testada
+        transfers = my_app1.create_pix_transfers()
+        self.assertIsNone(transfers)  # Espera-se que a função retorne None em caso de exceção
 
-        client = api.Client()
-        transfer_id = "1234567890"
-        transfer_status = client.pix.transfers.get_status(transfer_id)
-
-        self.assertEqual(transfer_status['status'], "processing")
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

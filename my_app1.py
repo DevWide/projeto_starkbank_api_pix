@@ -1,7 +1,10 @@
 import starkbank
 import datetime
 import time
+import logging
 from random import randint
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Autenticação
 project = starkbank.Project(
@@ -33,11 +36,15 @@ def create_pix_transfers():
 
     try:
         created_transfers = starkbank.transfer.create(transfers)
+    except starkbank.error.StarkBankError as e:
+        # Log a mensagem de erro específica
+        logging.error(f"StarkBank Error: {e}")
+        return None
     except Exception as e:
-        print(f"Error creating transfers: {e}")
+        # Log a mensagem de erro genérica
+        logging.error(f"Unexpected Error: {e}")
         return None
     return created_transfers
-
 
 def main():
     start_time = datetime.datetime.now()
