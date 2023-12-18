@@ -1,0 +1,42 @@
+# Arquivos de configuração com credenciais
+*.env
+config.json
+
+# Pastas e arquivos de ambiente virtual do Python
+venv/
+env/
+ENV/
+
+# Arquivos de cache do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Arquivos de banco de dados SQLite
+*.sqlite
+
+# Arquivos de IDEs e editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Outros arquivos e pastas
+.DS_Store
+Thumbs.db
