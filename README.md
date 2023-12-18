@@ -46,7 +46,7 @@ python3 -m unittest tests_my_app.py
 ````
 
 **Os testes cobrem os seguintes aspectos:**
-*  `test_create_pix_transfers_successful``:** Verifica se a função `create_pix_transfers` cria transferências corretamente quando não há erros.
+*  `test_create_pix_transfers_successful`: Verifica se a função `create_pix_transfers` cria transferências corretamente quando não há erros.
 *  `test_create_pix_transfers_exception`: Testa o comportamento da função `create_pix_transfers` em caso de erros durante a criação de transferências.
 
 # Estrutura do Código:
