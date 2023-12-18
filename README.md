@@ -42,26 +42,12 @@ Este projeto inclui também testes unitários para garantir que as funcionalidad
 
 Para executar os testes, use o seguinte comando:
 ````
-python3 -m unittest
+python3 -m unittest tests_my_app.py
 ````
 
 **Os testes cobrem os seguintes aspectos:**
-* Criação de transferências PIX com validação de entradas.
-* Obtenção do status de transferências PIX, verificando a consistência da resposta da API.
-
-## Estrutura dos testes:
-### Classes e Métodos de Teste
-**CreateTransferTest**
-
-* Esta classe de teste é responsável por testar a criação de transferências PIX. Ela verifica se a aplicação se comporta como esperado quando fornecidos dados válidos e inválidos.
-
-* **test_create_transfer_with_invalid_account_type:** Este método testa a função de criação de transferências com um tipo de conta inválido. Ele verifica se um ValueError é lançado corretamente, garantindo que a aplicação lide adequadamente com entradas inválidas.
-
-**GetTransferStatusTest**
-
-Esta classe de teste foca na funcionalidade de obter o status de transferências PIX.
-
-* **test_get_transfer_status_processing:** Utilizando unittest.mock.patch, este teste simula a resposta da API para a consulta de status de uma transferência. Ele verifica se a aplicação corretamente identifica e trata um status de transferência como "processing".
+*  `test_create_pix_transfers_successful``:** Verifica se a função `create_pix_transfers` cria transferências corretamente quando não há erros.
+*  `test_create_pix_transfers_exception`: Testa o comportamento da função `create_pix_transfers` em caso de erros durante a criação de transferências.
 
 # Estrutura do Código:
 O script principal deste projeto é responsável por criar transferências PIX automáticas usando a API da StarkBank e por gerar um relatório detalhado sobre os resultados dessas transferências. Abaixo está uma descrição das principais partes do código:
